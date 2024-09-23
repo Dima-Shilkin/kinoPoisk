@@ -1,6 +1,8 @@
  export function showMovies(data) {
   const moviesEl = document.querySelector('.main__movies');
 
+  moviesEl.innerHTML = '';
+
   data.docs.forEach(movie => {
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
@@ -9,7 +11,7 @@
         <div class="movie__cover-inner">
           <img 
             class="movie__cover-inner_img"
-            src="${movie.poster.previewUrl}"
+            src="${getImgForPoster(movie)}"
             alt="${movie.name}"
           />
           <div class="movie__cover-inner-darkened"></div>
@@ -35,3 +37,17 @@ function getClassByRate(rate) {
     return 'red'
   }
 }
+
+// Функция для обработки рейтинга
+
+// Для добавление дефолтного постера
+function getImgForPoster(img) {
+  if (!img.poster || !img.poster.previewUrl) {
+    return './img/defaultPreview.JPG'
+  }
+  return img.poster.previewUrl
+}
+
+
+
+
