@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: "Open Sans", sans-serif;
+  transition: background-color .4s;
+}
+
+/* Шапка */
+.conteiner {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.header__conteiner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 35px;
+  height: 60px;
+  /* margin-bottom: 20px; */
+}
+
+.header__logo {
+  font-size: 32px;
+  text-decoration: none;
+  color: var(--logo-color)
+}
+
+/* Мэйн */
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 30px;
+  align-items: center;
+}
+
+.main__search-form {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0 35px;
+}
+
+.main__search-form_input {
+  padding: 8px;
+  border: 2px solid #1a191f;
+  border-radius: 18px;
+  outline: none;
+  width: 100%;
+  max-width: 650px;
+  font-size: 20px;
+}
+
+/* ------- */
+.main__movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  column-gap: 10px;
+  padding: 0 10px;;
+}
+
+.movie {
+  width: 240px;
+  position: relative;
+}
+
+.movie__cover-inner {
+  position: relative;
+  height: 360px;
+}
+
+.movie__cover-inner_img {
+  max-width: 100%;
+  height: 100%;
+}
+
+.movie__cover-inner-darkened {
+  background-color: #000;
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.movie__cover-inner-darkened:hover {
+  background-color: grey;
+  cursor: pointer;
+}
+
+.movie__info {
+  padding: 10px 0px;
+}
+
+.movie__info_title {
+  font-size: 16px;
+  color: var(--title-color);
+}
+
+.movie__info_category {
+  font-size: 14px;
+  color: #ffd80e;
+}
+
+.movie__info_average {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a191f;
+  color: white;
+  font-size: 14px;
+}
+
+.movie__info_average_green {
+  border: 2px solid green;
+}
+
+.movie__info_average_orange {
+  border: 2px solid orange;
+}
+
+.movie__info_average_red {
+  border: 2px solid red;
+}
+
+
+
+
+
+/* Ниже для чекбокса */
+.checkbox {
+  display: inline-block;
+}
+
+.checkbox__inp {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  appearance: none;
+  
+}
+
+.checkbox__inner {
+  display: inline-block;
+  position: relative;
+  padding: 8px;
+  padding-left: 53px;
+  cursor: pointer;
+}
+
+.checkbox__inner::before {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -8px;
+  width: 60px;
+  height: 36px;
+  background-color: white;
+  border-radius: 18px;
+  transition: background-color .4s;
+
+}
+
+.checkbox__inner::after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  background-image: url(/img/summer-icon.png);
+  background-size: cover;
+  left: 7px;
+  top: -2px;
+  transition: background-color .4s, left .4s;
+}
+
+.checkbox__inp:checked + .checkbox__inner::before {
+  background-color: rgb(212, 212, 247);
+}
+
+.checkbox__inp:checked + .checkbox__inner::after {
+  left: 27px;
+}
+
+
+
+
+
+
+
+
+
+

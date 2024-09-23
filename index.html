@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>КиноКася</title>
+  <!-- тут подключу шрифты -->
+  <!-- <link rel="icon" href="./images/favicon.ico" sizes="any">  только надо найти-->
+  <!-- <link rel="icon" href="./images/favicon.ico" sizes="any">
+  <link rel="icon" href="./images/favicon.svg" type="image/svg+xml"> -->
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/light.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="conteiner">
+    <div class="header__conteiner">
+      <a class="header__logo" href="index.html">КасяПоиск</a>
+      <label class="checkbox" for="checkbox">
+        <input class="checkbox__inp" type="checkbox" id="checkbox">
+        <span class="checkbox__inner"></span>
+      </label>
+    </div>
+  </header>
+  <main class="main conteiner">
+    <form class="main__search-form" action="">
+      <input class="main__search-form_input" type="text" placeholder="Введите название фильма">
+    </form>
+    <div class="main__movies">
+    </div>  
+  </main>
+    
+
+
+  <script defer type="module" src="./js/index.js"></script>
+</body>
+</html>
