@@ -1,7 +1,8 @@
 :root {
   --bg-color: #1a191f;
   --bg-color-inp: rgb(252, 205, 205);
-  --logo-color: white;
-  --title-color: white;
+  --logo-title-error: white;
+  --category: #ffd80e;
+  --modal-background: rgba(8, 7, 7, 0.42);
 
 }

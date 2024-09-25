@@ -1,4 +1,7 @@
 body.theme-light {
  --bg-color: rgb(234, 234, 245)
-
+ --bg-color-inp: rgb(252, 205, 205);
+ --logo-title-error: rgb(4, 4, 4);
+ --category: rgb(112, 109, 109);
+ --modal-background: rgba(255, 255, 255, 0.42);
 }

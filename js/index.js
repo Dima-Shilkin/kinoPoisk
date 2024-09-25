@@ -21,17 +21,17 @@ async function getMovies(url) {
     }
 
     const respData = await resp.json();
-    console.log(respData);
+    console.log(respData)
     showMovies(respData);
 
     if (respData.searchFilmsCountResult === 0) {
-      console.log(`ошибка`)
+      showNoResult();
     }
   }
   catch(error) {
     console.log(`Ошибка: ${error.message}`)
   }
-  }
+}
 
   getMovies(API_URL_TOP_POPULAR);
  
@@ -47,9 +47,27 @@ form.addEventListener('submit', (e) => {
 })
 // ----------------------
 
-// if (respData.searchFilmsCountResult === 0) {
-//   console.log('Ошибка: Фильмы не найдены'); // Выводим сообщение об ошибке
-// }
+function showNoResult() {
+  // Проверяем, существует ли уже сообщение об ошибке
+  const existingError = document.querySelector('.no-results');
+
+  if (existingError) {
+    existingError.remove();
+  }
+
+  // Создаем новое сообщение об ошибке
+  const noResultError = document.createElement('p');
+  noResultError.innerHTML = 'Фильм не найден<br>Попробуйте еще раз';
+  noResultError.classList.add('no-results');
+  form.insertAdjacentElement('afterend', noResultError);
+
+  // Показать сообщение с небольшой задержкой
+  setTimeout(() => {
+    noResultError.classList.add('show');
+  }, 50);
+}
+
+
 
 
 

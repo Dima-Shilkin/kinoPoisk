@@ -11,7 +11,7 @@ export async function openModal(id) {
     }
   });
   const respData = await resp.json();
-  console.log(respData)
+  console.log(respData);
   modalEl.classList.add('open');
   scrollBarToggler()
 
@@ -31,8 +31,11 @@ export async function openModal(id) {
             <p class="modal__countri modal__discription">Страна: ${respData.data.premiereWorldCountry}</p>
             <p class="modal__genre modal__discription">Жанр: ${genre}</p>
             <p class="modal__discription">Описание: ${respData.data.description}</p>
-            <a class="modal__">
+            <a class="modal__discription modal__discription_link" href="${respData.data.webUrl}" target="_blank">Cмотреть здесь</a>
           </div>
+        </div>
+        <div class="modal__screen">
+          
         </div>
   `
   
