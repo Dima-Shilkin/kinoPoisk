@@ -69,6 +69,11 @@ body {
 .movie {
   width: 240px;
   position: relative;
+  transition: scale .4s;
+}
+
+.movie:hover {
+ scale: 1.02;
 }
 
 .movie__cover-inner {
@@ -96,6 +101,7 @@ body {
 .movie__cover-inner-darkened:hover {
   background-color: grey;
   cursor: pointer;
+  
 }
 
 .movie__info {
@@ -105,6 +111,10 @@ body {
 .movie__info_title {
   font-size: 16px;
   color: var(--title-color);
+}
+
+.movie__info_year {
+  color: rgb(112, 109, 109);
 }
 
 .movie__info_category {
@@ -138,10 +148,6 @@ body {
 .movie__info_average_red {
   border: 2px solid red;
 }
-
-
-
-
 
 /* Ниже для чекбокса */
 .checkbox {
@@ -200,6 +206,88 @@ body {
 .checkbox__inp:checked + .checkbox__inner::after {
   left: 27px;
 }
+
+/* Модальное окно */
+
+
+.modal {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  overflow-y: auto;
+  background: rgba(8, 7, 7, 0.42);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.4px);
+  -webkit-backdrop-filter: blur(5.4px);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .7s, visibility .7s;
+}
+
+.modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal__content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin: 50px auto;
+  transform: scale(0);
+  transition: transform .7s;
+}
+
+.modal.open .modal__content {
+  transform: scale(1);
+}
+
+.modal__image {
+  width: 360px;
+  height: 540px;
+}
+
+.modal__image-img {
+  width: 100%;
+  height: 100%;
+}
+
+.modal__image-close {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+.modal__details {
+  width: 360px;
+  font-size: 18px;
+}
+.modal__title {
+  text-transform: uppercase;
+  font-size: 25px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.modal__discription {
+  margin-bottom: 5px;
+}
+
+/* РАЗОБРАТЬСЯ, ПРИ ЕГО ДОБАВЛЕНИИ ПРИ ОТКРЫТИИ МОДАЛЬНОГО ОКНА ДЕРГАЕТСЯ ЭКРАН*/
+.stop__scrolling {
+  overflow: hidden;
+}
+
+
 
 
 

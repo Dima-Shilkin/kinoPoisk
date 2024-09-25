@@ -15,24 +15,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="">
   <header class="conteiner">
     <div class="header__conteiner">
       <a class="header__logo" href="index.html">КасяПоиск</a>
       <label class="checkbox" for="checkbox">
-        <input class="checkbox__inp" type="checkbox" id="checkbox">
+        <input class="checkbox__inp" type="checkbox" id="checkbox" name="checkbox_option">
         <span class="checkbox__inner"></span>
       </label>
     </div>
   </header>
   <main class="main conteiner">
-    <form class="main__search-form" action="">
-      <input class="main__search-form_input" type="text" placeholder="Введите название фильма">
-    </form>
-    <div class="main__movies">
-    </div>  
-  </main>
     
+    <form class="main__search-form" action="">
+      <input class="main__search-form_input" type="text" placeholder="Введите название" name="search">
+    </form>
+    <div class="main__movies"></div>
+    <div class="modal"></div>
+    
+    
+  </main>
 
 
   <script defer type="module" src="./js/index.js"></script>
