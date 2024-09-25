@@ -13,7 +13,8 @@ function mapMoviesData(data) {
       year: movie.year, // год
       id: movie.kinopoiskId || movie.filmId,
     }));
-  }
+  };
+  
  export function showMovies(data) {
   const moviesEl = document.querySelector('.main__movies');
   const movies = mapMoviesData(data);
