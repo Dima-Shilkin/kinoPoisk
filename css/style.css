@@ -305,7 +305,6 @@ body {
 .swiper {
   grid-column: 1 / -1;
   height: 168px;
-  margin: 20px 0;
   width: 100%;
   max-width: 1200px; 
 }
@@ -360,6 +359,7 @@ body {
     top: 15px;
   }
 }
+
 
 
 
