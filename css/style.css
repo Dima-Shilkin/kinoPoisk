@@ -228,6 +228,7 @@ body {
   visibility: hidden;
   opacity: 0;
   transition: opacity .7s, visibility .7s;
+  
 }
 
 .modal.open {
@@ -244,6 +245,7 @@ body {
   transition: transform .7s;
   max-width: 1000px;
   width: 90%;
+  padding-bottom: 50px;
 }
 
 .modal.open .modal__content {

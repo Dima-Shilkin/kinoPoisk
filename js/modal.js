@@ -77,7 +77,7 @@ function scrollBarToggler() {
     const resp = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images?type=SCREENSHOT&page=1`, {
       headers: {
         'Content-Type': 'application/json',
-        'X-API-KEY': APIKEY,  // Замени APIKEY на свой реальный ключ
+        'X-API-KEY': APIKEY,
       }
     });
   
@@ -85,13 +85,11 @@ function scrollBarToggler() {
     
     // Создаем контейнер для слайдов
     const screens = document.createElement('div');
-    screens.className = 'swiper-wrapper';  // Контейнер для слайдов
+    screens.className = 'swiper-wrapper'; 
     
-    // Получаем контейнер Swiper
     const swiperr = document.querySelector('.swiper');
-    swiperr.appendChild(screens);  // Добавляем swiper-wrapper внутрь swiper
+    swiperr.appendChild(screens);
   
-    // Проходим по изображениям и добавляем их как слайды
     respData.items.forEach(item => {
       const screenImg = `
         <div class="swiper-slide">
@@ -101,7 +99,6 @@ function scrollBarToggler() {
       screens.insertAdjacentHTML('beforeend', screenImg);
     });
   
-    // Создаем элемент для пагинации и добавляем его в swiper
     const swiperPagination = document.createElement('div');
     swiperPagination.className = 'swiper-pagination';  // Контейнер для пагинации
     swiperr.appendChild(swiperPagination);  // Добавляем pagination внутрь swiper
@@ -120,11 +117,10 @@ function scrollBarToggler() {
         slideShadows: true,
       },
       pagination: {
-        el: ".swiper-pagination",  // Привязываем пагинацию к новому элементу
+        el: ".swiper-pagination",
       },
     });
   
-    // Обновляем Swiper после динамической загрузки данных
     swiper.update();
   }
 
