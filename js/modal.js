@@ -33,14 +33,15 @@ export async function openModal(id) {
             <p class="modal__discription">Описание: ${respData.data.description}</p>
             <a class="modal__discription modal__discription_link" href="${respData.data.webUrl}" target="_blank">Cмотреть здесь</a>
           </div>
-        </div>
-        <div class="modal__screen">
           
         </div>
   `
   
   const btnClose = document.querySelector('.modal__image-close');
-  btnClose.addEventListener('click', () => closeModal())
+  btnClose.addEventListener('click', () => closeModal());
+  
+  
+  await showScreen(respData.data.filmId);
 }
 
 function closeModal() {
@@ -79,5 +80,30 @@ function scrollBarToggler() {
       : ''
   }
 
- 
+async function showScreen(id) {
+  const resp = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images?type=SCREENSHOT&page=1`, {
+  headers: {
+    'Content-Type': 'aplication/json',
+    'X-API-KEY': APIKEY,
+  }
+  });
+  const respData = await resp.json();
+  console.log(respData);
+
+  const screens = document.createElement('div');
+  screens.className = 'screen__box';
+  const modalContent = document.querySelector('.modal__content');
+  modalContent.appendChild(screens);
+
+  respData.items.forEach(item => {
+    const screenImg = `
+      <img class="modal__screen-img" src="${item.imageUrl}" alt="">
+    `
+    screens.insertAdjacentHTML('beforeend', screenImg);
+  })
+}
+
+
+
+
 

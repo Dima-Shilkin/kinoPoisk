@@ -79,3 +79,5 @@ function getClassByRate(rate) {
 
 
 
+
+

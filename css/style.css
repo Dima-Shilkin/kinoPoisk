@@ -265,7 +265,7 @@ body {
   width: 25px;
   cursor: pointer;
   position: absolute;
-  right: 0;
+  right: 13px;
 }
 
 .modal__details {
@@ -298,11 +298,29 @@ body {
   color: var(--logo-title-error);
 }
 
-.modal__screen {
+
+
+/* тут добавил 2 свойства */
+
+.screen__box {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
+  gap: 20px;
+  scrollbar-width: none;
+  padding: 0 20px;
+  max-width: 80vw;
+  overflow-x: scroll;
+  padding-bottom: 50px;
+}
+
+.screen__box::-webkit-scrollbar {
+  display: none; /* Убирает полосу прокрутки в Chrome, Safari и Edge */
+}
+
+.modal__screen-img {
+  flex-shrink: 0;
+  display: block;
+  width: 400px;
+  /* object-fit: cover; */
 }
 
 .stop__scrolling {
@@ -325,9 +343,9 @@ body {
 }
 
 @media (max-width: 780px) {
-  .modal__image-close {
+  /* .modal__image-close {
     right: 13px;
-  }
+  } */
 }
 
 
