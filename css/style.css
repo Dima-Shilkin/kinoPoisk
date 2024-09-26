@@ -192,7 +192,7 @@ body {
   width: 25px;
   height: 25px;
   border-radius: 15px;
-  background-image: url(/img/summer-icon.png);
+  background-image: url(../img/summer-icon.png);
   background-size: cover;
   left: 7px;
   top: -2px;
