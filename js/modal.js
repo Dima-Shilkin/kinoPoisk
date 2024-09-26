@@ -33,6 +33,7 @@ export async function openModal(id) {
             <p class="modal__discription">Описание: ${respData.data.description}</p>
             <a class="modal__discription modal__discription_link" href="${respData.data.webUrl}" target="_blank">Cмотреть здесь</a>
           </div>
+          <div class="swiper mySwiper"></div>
           
         </div>
   `
@@ -63,15 +64,7 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-// // добавляет или удаляет марджин у body
-// function scrollBarToggler() {
-//   if (modalEl.classList.contains('open')) {
-//     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-//     document.body.style.marginRight = scrollBarWidth + 'px';
-//   } else {
-//     document.body.style.marginRight = ''
-//   }
-// }
+// // добавляет или удаляет скролл у body
 function scrollBarToggler() {
 
   const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -80,28 +73,60 @@ function scrollBarToggler() {
       : ''
   }
 
-async function showScreen(id) {
-  const resp = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images?type=SCREENSHOT&page=1`, {
-  headers: {
-    'Content-Type': 'aplication/json',
-    'X-API-KEY': APIKEY,
+  async function showScreen(id) {
+    const resp = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images?type=SCREENSHOT&page=1`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-KEY': APIKEY,  // Замени APIKEY на свой реальный ключ
+      }
+    });
+  
+    const respData = await resp.json();
+    
+    // Создаем контейнер для слайдов
+    const screens = document.createElement('div');
+    screens.className = 'swiper-wrapper';  // Контейнер для слайдов
+    
+    // Получаем контейнер Swiper
+    const swiperr = document.querySelector('.swiper');
+    swiperr.appendChild(screens);  // Добавляем swiper-wrapper внутрь swiper
+  
+    // Проходим по изображениям и добавляем их как слайды
+    respData.items.forEach(item => {
+      const screenImg = `
+        <div class="swiper-slide">
+          <img src="${item.imageUrl}" alt="">
+        </div>
+      `;
+      screens.insertAdjacentHTML('beforeend', screenImg);
+    });
+  
+    // Создаем элемент для пагинации и добавляем его в swiper
+    const swiperPagination = document.createElement('div');
+    swiperPagination.className = 'swiper-pagination';  // Контейнер для пагинации
+    swiperr.appendChild(swiperPagination);  // Добавляем pagination внутрь swiper
+  
+    // Инициализируем Swiper после добавления слайдов и пагинации
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: ".swiper-pagination",  // Привязываем пагинацию к новому элементу
+      },
+    });
+  
+    // Обновляем Swiper после динамической загрузки данных
+    swiper.update();
   }
-  });
-  const respData = await resp.json();
-  console.log(respData);
-
-  const screens = document.createElement('div');
-  screens.className = 'screen__box';
-  const modalContent = document.querySelector('.modal__content');
-  modalContent.appendChild(screens);
-
-  respData.items.forEach(item => {
-    const screenImg = `
-      <img class="modal__screen-img" src="${item.imageUrl}" alt="">
-    `
-    screens.insertAdjacentHTML('beforeend', screenImg);
-  })
-}
 
 
 
