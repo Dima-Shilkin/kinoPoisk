@@ -68,6 +68,7 @@ body {
 
 .movie {
   width: 240px;
+  /* width: clamp(6.25rem, 0.3409rem + 29.5455vw, 22.5rem); */
   position: relative;
   transition: scale .4s;
 }
@@ -78,7 +79,8 @@ body {
 
 .movie__cover-inner {
   position: relative;
-  height: 360px;
+  height: 360px; 
+  /* height: clamp(6.25rem, 0.3409rem + 29.5455vw, 22.5rem); */
 }
 
 .movie__cover-inner_img {

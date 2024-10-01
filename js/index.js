@@ -7,20 +7,23 @@ const search = document.querySelector('.main__search-form_input');
 
 changeTheme(); // вызываю функцию смены темы
 
+// фетч логика
+async function fetchData(url) {
+  const resp = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-API-KEY': APIKEY,
+    }
+  })
+  if (!resp.ok) {
+    throw new Error(`Ошибка запроса! Статус ошибки: ${resp.status} Обновите страницу`)
+  }
+  return await resp.json();
+}
+
 async function getMovies(url) {
   try {
-    const resp = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-API-KEY': APIKEY,
-      }
-    });
-
-    if (!resp.ok) {
-      throw new Error(`Ошибка запроса! Статус ошибки: ${resp.status} Обновите страницу`)
-    }
-
-    const respData = await resp.json();
+    const respData = await fetchData(url)
     showMovies(respData);
 
     if (respData.searchFilmsCountResult === 0) {
@@ -32,7 +35,7 @@ async function getMovies(url) {
   }
 }
 
-  getMovies(API_URL_TOP_POPULAR);
+getMovies(API_URL_TOP_POPULAR);
  
 
 form.addEventListener('submit', (e) => {

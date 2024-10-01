@@ -3,47 +3,53 @@ import { APIKEY, API_URL_MOVIE_DETAILS } from "./api.js";
 // модальное окно
 const modalEl = document.querySelector('.modal');
 
-export async function openModal(id) {
+async function fetchDataForModal(id) {
   const resp = await fetch(API_URL_MOVIE_DETAILS + id, {
     headers: {
       'Content-Type': 'aplication/json',
       'X-API-KEY': APIKEY,
     }
-  });
-  const respData = await resp.json();
-  console.log(respData);
+  })
+  return await resp.json();
+}
+
+export async function openModal(id) {
+  const respData = await fetchDataForModal(id);
   modalEl.classList.add('open');
-  scrollBarToggler()
+  scrollBarToggler();
 
   document.body.classList.add('stop__scrolling');
   
-  const genre = respData.data.genres.map(genre => genre.genre).join(', ')
-  
-  modalEl.innerHTML = `
-        <div class="modal__content">
-          <img class="modal__image-close" src="./img/close.png" alt="кнопка закрыть">
-          <div class="modal__image">
-            <img class="modal__image-img" src="${respData.data.posterUrl}" alt="">
-          </div>
-          <div class="modal__details">
-            <p class="modal__title ">${respData.data.nameRu}</p>
-            <p class="modal__year modal__discription">Год выпуска: ${respData.data.year}</p>
-            <p class="modal__countri modal__discription">Страна: ${respData.data.premiereWorldCountry}</p>
-            <p class="modal__genre modal__discription">Жанр: ${genre}</p>
-            <p class="modal__discription">Описание: ${respData.data.description}</p>
-            <a class="modal__discription modal__discription_link" href="${respData.data.webUrl}" target="_blank">Cмотреть здесь</a>
-          </div>
-          <div class="swiper mySwiper"></div>
-          
-        </div>
-  `
-  
+  modalEl.innerHTML = createModalContent(respData.data);  
+
   const btnClose = document.querySelector('.modal__image-close');
   btnClose.addEventListener('click', () => closeModal());
   
-  
   await showScreen(respData.data.filmId);
 }
+
+function createModalContent(data) {
+  const genre = data.genres.map(genre => genre.genre).join(', ');
+
+  return `
+    <div class="modal__content">
+      <img class="modal__image-close" src="./img/close.png" alt="кнопка закрыть">
+      <div class="modal__image">
+        <img class="modal__image-img" src="${data.posterUrl}" alt="">
+      </div>
+      <div class="modal__details">
+        <p class="modal__title ">${data.nameRu}</p>
+        <p class="modal__year modal__discription">Год выпуска: ${data.year}</p>
+        <p class="modal__countri modal__discription">Страна: ${data.premiereWorldCountry}</p>
+        <p class="modal__genre modal__discription">Жанр: ${genre}</p>
+        <p class="modal__discription">Описание: ${data.description}</p>
+        <a class="modal__discription modal__discription_link" href="${data.webUrl}" target="_blank">Cмотреть здесь</a>
+      </div>
+      <div class="swiper mySwiper"></div>
+    </div>
+  `;
+}
+
 
 function closeModal() {
   modalEl.classList.remove('open');

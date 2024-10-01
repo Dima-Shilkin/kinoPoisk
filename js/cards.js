@@ -21,32 +21,9 @@ function mapMoviesData(data) {
   moviesEl.innerHTML = '';
 
   movies.forEach(movie => {
-    const movieEl = document.createElement('article');
-    movieEl.classList.add('movie');
+    const movieCard = createMovieCard(movie)
     
-    movieEl.innerHTML = `
-    <div class="movie">
-        <div class="movie__cover-inner">
-          <img 
-            class="movie__cover-inner_img"
-            src="${movie.poster}"
-            alt="${movie.name}"
-          />
-          <div class="movie__cover-inner-darkened"></div>
-        </div>
-        <div class="movie__info">
-          <h2 class="movie__info_title">${movie.name}</h2>
-          <p class="movie__info_year">${movie.year}</p>
-          <p class="movie__info_category">${movie.genres}</p>
-          ${getRating(movie.rating)}
-        </div>
-      </div>
-    `;
-
-   // слушатель для модального окна
-    movieEl.addEventListener('click', () => openModal(movie.id));
-    
-    moviesEl.appendChild(movieEl);
+    moviesEl.appendChild(movieCard);
   });
 };
 
@@ -70,6 +47,35 @@ function getClassByRate(rate) {
     return 'red'
   }
 }
+
+function createMovieCard(movie) {
+  const movieEl = document.createElement('article');
+    movieEl.classList.add('movie');
+    
+    movieEl.innerHTML = `
+    <div class="movie">
+        <div class="movie__cover-inner">
+          <img 
+            class="movie__cover-inner_img"
+            src="${movie.poster}"
+            alt="${movie.name}"
+          />
+          <div class="movie__cover-inner-darkened"></div>
+        </div>
+        <div class="movie__info">
+          <h2 class="movie__info_title">${movie.name}</h2>
+          <p class="movie__info_year">${movie.year}</p>
+          <p class="movie__info_category">${movie.genres}</p>
+          ${getRating(movie.rating)}
+        </div>
+      </div>
+    `;
+
+   // слушатель для модального окна
+    movieEl.addEventListener('click', () => openModal(movie.id));
+    return movieEl;
+}
+
 
 
 
