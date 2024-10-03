@@ -1,20 +1,11 @@
-import { APIKEY, API_URL_MOVIE_DETAILS } from "./api.js";
+import { MovieAPI } from "./MovieAPI.js";
 
 // модальное окно
+const movieAPI = new MovieAPI();
 const modalEl = document.querySelector('.modal');
 
-async function fetchDataForModal(id) {
-  const resp = await fetch(API_URL_MOVIE_DETAILS + id, {
-    headers: {
-      'Content-Type': 'aplication/json',
-      'X-API-KEY': APIKEY,
-    }
-  })
-  return await resp.json();
-}
-
 export async function openModal(id) {
-  const respData = await fetchDataForModal(id);
+  const respData = await movieAPI.getMovieDetails(id);
   modalEl.classList.add('open');
   scrollBarToggler();
 
@@ -80,14 +71,7 @@ function scrollBarToggler() {
   }
 
   async function showScreen(id) {
-    const resp = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images?type=SCREENSHOT&page=1`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-API-KEY': APIKEY,
-      }
-    });
-  
-    const respData = await resp.json();
+    const respData = await movieAPI.getMovieScreenshots(id);
     
     // Создаем контейнер для слайдов
     const screens = document.createElement('div');

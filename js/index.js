@@ -1,51 +1,40 @@
 import {changeTheme} from './theme.js';
 import { showMovies } from './cards.js';
-import { APIKEY, API_URL_TOP_POPULAR, API_URL_SEARCH } from './api.js';
+import { MovieAPI } from './MovieAPI.js';
 
 const form = document.querySelector('.main__search-form');
 const search = document.querySelector('.main__search-form_input');
-
+const movieAPI = new MovieAPI();
 changeTheme(); // вызываю функцию смены темы
 
-// фетч логика
-async function fetchData(url) {
-  const resp = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      'X-API-KEY': APIKEY,
-    }
-  })
-  if (!resp.ok) {
-    throw new Error(`Ошибка запроса! Статус ошибки: ${resp.status} Обновите страницу`)
-  }
-  return await resp.json();
-}
 
-async function getMovies(url) {
+
+async function loadPopularMovies() {
   try {
-    const respData = await fetchData(url)
+    const respData = await movieAPI.getPopularMovies();
     showMovies(respData);
-
-    if (respData.searchFilmsCountResult === 0) {
-      showNoResult();
-    }
   }
   catch(error) {
     console.log(`Ошибка: ${error.message}`)
   }
 }
 
-getMovies(API_URL_TOP_POPULAR);
+loadPopularMovies();
  
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const keyword = search.value;
 
-  const apiSearchUrl = `${API_URL_SEARCH}${search.value}`;
-  if (search.value) {
-      getMovies(apiSearchUrl);
-      search.value = '';
-  } 
+  if (keyword) {
+    const respData = await movieAPI.searchMovies(keyword);
+    showMovies(respData);
+    search.value = '';
+
+    if (respData.searchFilmsCountResult === 0) {
+      showNoResult();
+    }
+  }
 })
 // ----------------------
 
