@@ -1,18 +1,25 @@
 import {changeTheme} from './theme.js';
 import { showMovies } from './cards.js';
 import { MovieAPI } from './MovieAPI.js';
+import { createObservable } from './createObservable.js';
+
 
 const form = document.querySelector('.main__search-form');
 const search = document.querySelector('.main__search-form_input');
 const movieAPI = new MovieAPI();
 changeTheme(); // вызываю функцию смены темы
 
+//создаю наблюдатель для списка фильмов
+const moviesObservable = createObservable([]);
+
+// подписываюсь на что-то там зачем-то там))))
+moviesObservable.subscribe(showMovies)
 
 
 async function loadPopularMovies() {
   try {
     const respData = await movieAPI.getPopularMovies();
-    showMovies(respData);
+    moviesObservable.setState(respData)
   }
   catch(error) {
     console.log(`Ошибка: ${error.message}`)
@@ -28,7 +35,7 @@ form.addEventListener('submit', async (e) => {
 
   if (keyword) {
     const respData = await movieAPI.searchMovies(keyword);
-    showMovies(respData);
+    moviesObservable.setState(respData)
     search.value = '';
 
     if (respData.searchFilmsCountResult === 0) {
