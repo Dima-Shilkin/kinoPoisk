@@ -1,5 +1,7 @@
 import { openModal } from "./modal.js";
 
+const moviesContainer = document.querySelector('.main__movies');
+
 //  Маппер
 function mapMoviesData(data) {
   // Проверяем наличие данных и выбираем правильное поле
@@ -51,9 +53,10 @@ function getClassByRate(rate) {
 function createMovieCard(movie) {
   const movieEl = document.createElement('article');
     movieEl.classList.add('movie');
+    movieEl.dataset.id = movie.id
     
     movieEl.innerHTML = `
-    <div class="movie">
+    <div>
         <div class="movie__cover-inner">
           <img 
             class="movie__cover-inner_img"
@@ -71,10 +74,18 @@ function createMovieCard(movie) {
       </div>
     `;
 
-   // слушатель для модального окна
-    movieEl.addEventListener('click', () => openModal(movie.id));
     return movieEl;
 }
+
+
+moviesContainer.addEventListener('click', (e) => {
+  const movieCard = e.target.closest('.movie');
+  
+  if (movieCard) {
+    const movieId = movieCard.dataset.id
+    openModal(movieId)
+  }
+})
 
 
 
